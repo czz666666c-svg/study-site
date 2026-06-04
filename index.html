@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>高数下 + 大物期末冲刺站</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="回到首页">
+          <span class="brand-mark">∑</span>
+          <span>
+            <strong>高数下 + 大物期末冲刺站</strong>
+            <small>双科冲刺 · 高播放量视频 · 7-14 天</small>
+          </span>
+        </a>
+        <nav class="nav-tabs" aria-label="主导航">
+          <button class="nav-tab active" data-view="home">首页</button>
+          <button class="nav-tab" data-view="videos">视频</button>
+          <button class="nav-tab" data-view="topics">例题</button>
+          <button class="nav-tab" data-view="review">错题</button>
+          <button class="nav-tab" data-view="planner">计划</button>
+        </nav>
+        <form class="login-box" id="loginForm">
+          <input id="nameInput" maxlength="18" placeholder="输入昵称" aria-label="输入昵称">
+          <button type="submit">登录</button>
+        </form>
+      </header>
+
+      <main>
+        <section class="view active" id="view-home">
+          <div class="hero-grid">
+            <section class="hero-panel">
+              <div class="hero-copy">
+                <p class="eyebrow">高数下 + 大物双科版本</p>
+                <h1>高数下抓大题，大物抓公式和模型。</h1>
+                <p class="hero-text">高数下重点围绕多元函数、重积分、曲线曲面积分和级数判敛；大物按力学、热学、电磁学、光学快速补模型。</p>
+              </div>
+              <div class="formula-board" aria-label="公式速记板">
+                <span>∂z/∂x</span>
+                <strong>∫∫D f dA</strong>
+                <span>grad f</span>
+                <strong>∮ Pdx+Qdy</strong>
+              </div>
+            </section>
+            <aside class="progress-panel">
+              <div class="user-line">
+                <span id="userBadge">未登录</span>
+                <button id="resetProgress" type="button">重置进度</button>
+              </div>
+              <div class="ring" style="--percent: 0">
+                <span id="overallPercent">0%</span>
+              </div>
+              <p id="progressSummary">登录昵称后开始保存学习记录。</p>
+              <div class="stat-row">
+                <span><b id="doneTopics">0</b> 已完成考点</span>
+                <span><b id="doneVideos">0</b> 已看视频</span>
+                <span><b id="wrongCount">0</b> 错题</span>
+              </div>
+            </aside>
+          </div>
+
+          <section class="section-row">
+            <div>
+              <p class="eyebrow">今日任务</p>
+              <h2>按“高数下/大物视频 30 分钟 + 例题 4 道 + 错题 10 分钟”推进</h2>
+            </div>
+            <div class="day-control">
+              <label for="daysInput">剩余天数</label>
+              <input id="daysInput" type="number" min="7" max="14" value="10">
+            </div>
+          </section>
+          <div class="task-grid" id="todayTasks"></div>
+          <div class="subject-map" id="subjectMap"></div>
+        </section>
+
+        <section class="view" id="view-videos">
+          <section class="section-row">
+            <div>
+              <p class="eyebrow">视频资源库</p>
+              <h2>默认显示高数下和大物的高播放量视频</h2>
+            </div>
+            <div class="filters" data-scope="videos">
+              <select id="videoSubjectFilter" aria-label="视频学科筛选"></select>
+              <select id="videoVolumeFilter" aria-label="视频册别筛选"></select>
+              <input id="videoSearch" placeholder="搜索考点/用途" aria-label="搜索视频">
+            </div>
+          </section>
+          <div class="cards-grid" id="videoGrid"></div>
+        </section>
+
+        <section class="view" id="view-topics">
+          <section class="section-row">
+            <div>
+              <p class="eyebrow">原创例题库</p>
+              <h2>高数下和大物优先：每个考点 3 道基础、常考、易错</h2>
+            </div>
+            <div class="filters" data-scope="topics">
+              <select id="topicSubjectFilter" aria-label="例题学科筛选"></select>
+              <select id="topicVolumeFilter" aria-label="例题册别筛选"></select>
+              <input id="topicSearch" placeholder="搜索考点/公式" aria-label="搜索例题">
+            </div>
+          </section>
+          <div id="topicList" class="topic-list"></div>
+        </section>
+
+        <section class="view" id="view-review">
+          <section class="section-row">
+            <div>
+              <p class="eyebrow">错题复刷</p>
+              <h2>只看你标记过的题</h2>
+            </div>
+            <button id="clearWrong" type="button">清空错题</button>
+          </section>
+          <div id="wrongList" class="topic-list empty-state"></div>
+        </section>
+
+        <section class="view" id="view-planner">
+          <section class="section-row">
+            <div>
+              <p class="eyebrow">7-14 天计划生成器</p>
+              <h2>每天推进高数下主线，同时固定安排大物模型复习</h2>
+            </div>
+            <div class="day-control">
+              <label for="planDaysInput">计划天数</label>
+              <input id="planDaysInput" type="number" min="7" max="14" value="10">
+            </div>
+          </section>
+          <div id="planGrid" class="plan-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="topicTemplate">
+      <article class="topic-card"></article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
